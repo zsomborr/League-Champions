@@ -1,10 +1,14 @@
 import "./styles/App.css";
 import Champions from "./components/Champions";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div>
-      <Champions />
+      <Navbar />
+      <table>
+        <Champions />
+      </table>
     </div>
   );
 }
