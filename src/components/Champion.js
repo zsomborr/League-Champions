@@ -1,16 +1,23 @@
 const Champion = ({ champion, urlName }) => {
-  //   let urlName = champion.name
-  //     .replace(" ", "")
-  //     .replace("'", "")
-  //     .replace(".", "");
   return (
-    <div>
-      {champion.name}
-      <img
-        alt="test"
-        src={`https://ddragon.canisback.com/img/champion/tiles/${urlName}_0.jpg`}
-      ></img>
-    </div>
+    <tr>
+      <td>
+        <img
+          width="50px"
+          alt="test"
+          src={`https://ddragon.canisback.com/img/champion/tiles/${
+            urlName === "Fiddlesticks" ? "FiddleSticks" : urlName
+          }_0.jpg`}
+        ></img>
+      </td>
+      <td>
+        {champion.name}
+        <br />
+        {champion.title}
+      </td>
+      <td>{champion.tags}</td>
+      <td>{champion.blurb}</td>
+    </tr>
   );
 };
 
