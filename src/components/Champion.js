@@ -1,4 +1,4 @@
-const Champion = ({ champion, urlName }) => {
+const Champion = ({ champion, urlName, freeChampions }) => {
   return (
     <tr>
       <td>
@@ -15,6 +15,7 @@ const Champion = ({ champion, urlName }) => {
         <br />
         {champion.title}
       </td>
+      {/* <td>{freeChampions.contains(champion.key) ? "Yes" : "No"}</td> */}
       <td>{champion.tags}</td>
       <td>{champion.blurb}</td>
     </tr>
