@@ -22,11 +22,11 @@ const Champions = () => {
   };
 
   return (
-    <div>
+    <tbody>
       {Object.entries(champions).map(([key, value]) => (
         <Champion key={key} champion={value} urlName={key} />
       ))}
-    </div>
+    </tbody>
   );
 };
 
