@@ -6,7 +6,7 @@ const Champion = ({ champion, urlName, freeChampions }) => {
     <Link
       to={{
         pathname: `/championDetail/${champion.key}`,
-        state: { champion: champion },
+        state: { champion: champion, urlName: urlName },
       }}
     >
       <Card>
