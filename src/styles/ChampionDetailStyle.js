@@ -7,19 +7,19 @@ export const DetailDiv = styled.div`
 
 export const Li = styled.li`
   text-align: left;
-  margin-left: 50px;
+  margin-left: 30px;
 `;
 
 export const Card = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 5px;
-  background-color: darkgray;
+  background-color: #2c5d72;
   text-align: left;
   width: 600px;
   padding: 10px;
   margin: 10px;
-  color: black;
+  color: gold;
   font-size: 1rem;
   display: flex;
   flex-wrap: wrap;
