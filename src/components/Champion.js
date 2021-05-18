@@ -1,24 +1,39 @@
+import { Link } from "react-router-dom";
+import Card from "../styles/CardStyle.js";
+
 const Champion = ({ champion, urlName, freeChampions }) => {
   return (
-    <tr>
-      <td>
+    <Link
+      to={{
+        pathname: `/championDetail/${champion.key}`,
+        state: { champion: champion },
+      }}
+    >
+      <Card>
         <img
-          width="50px"
+          width="200px"
           alt="test"
           src={`https://ddragon.canisback.com/img/champion/tiles/${
             urlName === "Fiddlesticks" ? "FiddleSticks" : urlName
           }_0.jpg`}
         ></img>
-      </td>
-      <td>
+        <br />
         {champion.name}
         <br />
         {champion.title}
-      </td>
-      {/* <td>{freeChampions.contains(champion.key) ? "Yes" : "No"}</td> */}
-      <td>{champion.tags}</td>
-      <td>{champion.blurb}</td>
-    </tr>
+      </Card>
+    </Link>
+    // <tr>
+    //   <td>
+
+    //   </td>
+    //   <td>
+
+    //   </td>
+    //   {/* <td>{freeChampions.contains(champion.key) ? "Yes" : "No"}</td> */}
+    //   <td>{champion.tags}</td>
+    //   {/* <td>{champion.blurb}</td> */}
+    // </tr>
   );
 };
 
