@@ -23,10 +23,19 @@ const championDetail = (props) => {
           </HeaderDiv>
           <br />
           <br />
-          <HeaderDiv>Tags: {props.location.state.champion.tags}</HeaderDiv>
+          <HeaderDiv>
+            <thead>
+              <b>Tags:</b>
+            </thead>
+            {props.location.state.champion.tags.map((t) => (
+              <Li>{t}</Li>
+            ))}
+          </HeaderDiv>
           <br />
           <HeaderDiv>
-            Stats:
+            <thead>
+              <b>Stats:</b>
+            </thead>
             <Li>Attack: {props.location.state.champion.info.attack}</Li>
             <Li>Defense: {props.location.state.champion.info.defense}</Li>
             <Li>Magic: {props.location.state.champion.info.magic}</Li>
