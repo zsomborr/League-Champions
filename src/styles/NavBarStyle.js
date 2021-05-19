@@ -13,5 +13,5 @@ export const NavLink = styled(Link)`
 `;
 
 export const NavBar = styled.div`
-  background-color: #9e890e;
+  background-color: #d3b509;
 `;
