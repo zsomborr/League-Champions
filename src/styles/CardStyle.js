@@ -6,8 +6,9 @@ export default styled.div`
   border-radius: 5px;
   background-color: #2c5d72;
   text-align: center;
-  width: 17%;
+  width: 16.5%;
   padding: 10px;
+  padding-bottom: 20px;
   float: left;
   margin: 10px;
   color: gold;
