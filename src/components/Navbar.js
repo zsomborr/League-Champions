@@ -1,8 +1,17 @@
+import { NavBar } from "../styles/NavBarStyle";
+import Tags from "./Tags";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
 const Navbar = () => {
+  const location = useLocation();
+
+  console.log(location.pathname);
   return (
-    <div>
+    <NavBar>
       <p>menu</p>
-    </div>
+      {location.pathname === "/champions" ? <Tags /> : null}
+    </NavBar>
   );
 };
 
