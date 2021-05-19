@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 import Card from "../styles/CardStyle.js";
 
-const Champion = ({ champion, urlName, freeChampions }) => {
+const Champion = ({ champion, freeChampions }) => {
   return (
     <Link
       to={{
         pathname: `/championDetail/${champion.key}`,
-        state: { champion: champion, urlName: urlName },
+        state: { champion: champion },
       }}
     >
       <Card>
         <img
-          width="200px"
+          width="100%"
           alt="test"
           src={`https://ddragon.canisback.com/img/champion/tiles/${
-            urlName === "Fiddlesticks" ? "FiddleSticks" : urlName
+            champion.id === "Fiddlesticks" ? "FiddleSticks" : champion.id
           }_0.jpg`}
         ></img>
         <br />
@@ -23,17 +23,6 @@ const Champion = ({ champion, urlName, freeChampions }) => {
         {champion.title}
       </Card>
     </Link>
-    // <tr>
-    //   <td>
-
-    //   </td>
-    //   <td>
-
-    //   </td>
-    //   {/* <td>{freeChampions.contains(champion.key) ? "Yes" : "No"}</td> */}
-    //   <td>{champion.tags}</td>
-    //   {/* <td>{champion.blurb}</td> */}
-    // </tr>
   );
 };
 
