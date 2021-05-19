@@ -9,9 +9,9 @@ const championDetail = (props) => {
           width="350px"
           alt="test"
           src={`https://ddragon.canisback.com/img/champion/tiles/${
-            props.location.state.urlName === "Fiddlesticks"
+            props.location.state.champion.id === "Fiddlesticks"
               ? "FiddleSticks"
-              : props.location.state.urlName
+              : props.location.state.champion.id
           }_0.jpg`}
         ></img>
         <div>
@@ -24,22 +24,36 @@ const championDetail = (props) => {
           <br />
           <br />
           <HeaderDiv>
-            <thead>
-              <b>Tags:</b>
-            </thead>
-            {props.location.state.champion.tags.map((t) => (
-              <Li>{t}</Li>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tags:</th>
+                </tr>
+              </thead>
+            </table>
+            {props.location.state.champion.tags.map((t, index) => (
+              <Li key={index}>{t}</Li>
+
             ))}
           </HeaderDiv>
           <br />
           <HeaderDiv>
-            <thead>
-              <b>Stats:</b>
-            </thead>
-            <Li>Attack: {props.location.state.champion.info.attack}</Li>
-            <Li>Defense: {props.location.state.champion.info.defense}</Li>
-            <Li>Magic: {props.location.state.champion.info.magic}</Li>
-            <Li>Difficulty: {props.location.state.champion.info.difficulty}</Li>
+            <table>
+              <thead>
+                <tr>
+                  <th>Stats:</th>
+                </tr>
+              </thead>
+            </table>
+            <Li key="1">Attack: {props.location.state.champion.info.attack}</Li>
+            <Li key="2">
+              Defense: {props.location.state.champion.info.defense}
+            </Li>
+            <Li key="3">Magic: {props.location.state.champion.info.magic}</Li>
+            <Li key="4">
+              Difficulty: {props.location.state.champion.info.difficulty}
+            </Li>
+
           </HeaderDiv>
         </div>
         <br />
@@ -47,7 +61,7 @@ const championDetail = (props) => {
         <br />
       </Card>
       <Card>
-        <table class="table table-striped table-dark">
+        <table>
           <thead>
             <tr>
               <th scope="col">Stat</th>
