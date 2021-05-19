@@ -1,50 +1,77 @@
 import { Link } from "react-router-dom";
-import Card from "../styles/CardStyle.js";
+import { Card, CardContainer } from "../styles/CardStyle.js";
 import { ThemeProvider } from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { FavouriteContext } from "../contexts/FavouriteContext";
+import { Icon, InlineIcon } from "@iconify/react";
+import starIcon from "@iconify-icons/entypo/star";
 
 const Champion = ({ champion, freeChampions }) => {
   const [theme, setTheme] = useState({
-    color: "gold",
+    color: "#d3b509",
     backgroundColor: "#2c5d72",
   });
+
+  const [favouriteChampions, setFavouriteChampions] =
+    useContext(FavouriteContext);
 
   useEffect(() => {
     freeChampions.includes(champion.key)
       ? setTheme((oldTheme) => ({
           ...oldTheme,
           color: "#2c5d72",
-          backgroundColor: "gold",
+          backgroundColor: "#d3b509",
         }))
       : setTheme((oldTheme) => ({
           ...oldTheme,
-          color: "gold",
+          color: "#d3b509",
           backgroundColor: "#2c5d72",
         }));
-  }, []);
+  }, [champion.key, freeChampions]);
+
+  const isChampion = (element) => element === champion;
+
+  const toggleFavouriteChamp = (e) => {
+    e.preventDefault();
+    let index = favouriteChampions.findIndex(isChampion);
+    console.log(index);
+    let changedFavChamps = [...favouriteChampions];
+    index === -1
+      ? (changedFavChamps = [...changedFavChamps, champion])
+      : changedFavChamps.splice(index, 1);
+    console.log(changedFavChamps);
+    setFavouriteChampions(changedFavChamps);
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <Link
-        to={{
-          pathname: `/championDetail/${champion.key}`,
-          state: { champion: champion },
-        }}
-      >
-        <Card>
-          <img
-            width="100%"
-            alt="test"
-            src={`https://ddragon.canisback.com/img/champion/tiles/${
-              champion.id === "Fiddlesticks" ? "FiddleSticks" : champion.id
-            }_0.jpg`}
-          ></img>
-          <br />
-          {champion.name}
-          <br />
-          {champion.title}
-        </Card>
-      </Link>
+      <CardContainer>
+        <Icon
+          icon={starIcon}
+          color={favouriteChampions.includes(champion) ? theme.color : "black"}
+          onClick={toggleFavouriteChamp}
+        />
+        <Link
+          to={{
+            pathname: `/championDetail/${champion.key}`,
+            state: { champion: champion },
+          }}
+        >
+          <Card>
+            <img
+              width="100%"
+              alt="test"
+              src={`https://ddragon.canisback.com/img/champion/tiles/${
+                champion.id === "Fiddlesticks" ? "FiddleSticks" : champion.id
+              }_0.jpg`}
+            ></img>
+            <br />
+            {champion.name}
+            <br />
+            {champion.title}
+          </Card>
+        </Link>
+      </CardContainer>
     </ThemeProvider>
   );
 };
