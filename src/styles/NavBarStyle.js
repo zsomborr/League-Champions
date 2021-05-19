@@ -11,3 +11,7 @@ export const NavLink = styled(Link)`
     background-color: ${(props) => props.theme.hoverColor};
   }
 `;
+
+export const NavBar = styled.div`
+  background-color: #9e890e;
+`;
