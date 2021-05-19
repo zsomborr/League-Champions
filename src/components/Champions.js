@@ -3,7 +3,7 @@ import Champion from "./Champion.js";
 
 const Champions = (props) => {
   const [champions, setChampions] = useState([]);
-  // const [freeChampions, setFreeChampions] = useState([]);
+  const [freeChampions, setFreeChampions] = useState([]);
 
   useEffect(() => {
     const getChampions = async () => {
@@ -22,13 +22,30 @@ const Champions = (props) => {
       setChampions(taggedChampions);
     };
 
-    // const getFreeChampions = async () => {
-    //   const championsFromApi = await fetchFreeChampions();
-    //   setFreeChampions(championsFromApi);
-    // };
+    const getFreeChampions = async () => {
+      // const championsFromApi = await fetchFreeChampions();
+      const championsFromApi = [
+        "9",
+        "13",
+        "29",
+        "33",
+        "42",
+        "43",
+        "60",
+        "67",
+        "86",
+        "103",
+        "104",
+        "112",
+        "122",
+        "245",
+        "267",
+      ];
+      setFreeChampions(championsFromApi);
+    };
 
     getChampions();
-    // getFreeChampions();
+    getFreeChampions();
   }, [props.location.search]);
 
   const fetchChampions = async () => {
@@ -45,7 +62,7 @@ const Champions = (props) => {
         <Champion
           key={champion.id}
           champion={champion}
-          // freeChampions={freeChampions}
+          freeChampions={freeChampions}
         />
       ))}
     </div>
