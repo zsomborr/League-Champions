@@ -22,6 +22,10 @@ const Champions = (props) => {
       setChampions(taggedChampions);
     };
 
+    getChampions();
+  }, [props.location.search]);
+
+  useEffect(() => {
     const getFreeChampions = async () => {
       // const championsFromApi = await fetchFreeChampions();
       const championsFromApi = [
@@ -43,10 +47,8 @@ const Champions = (props) => {
       ];
       setFreeChampions(championsFromApi);
     };
-
-    getChampions();
     getFreeChampions();
-  }, [props.location.search]);
+  }, []);
 
   const fetchChampions = async () => {
     const res = await fetch(

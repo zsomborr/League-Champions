@@ -5,8 +5,6 @@ import { useEffect } from "react";
 
 const Navbar = () => {
   const location = useLocation();
-
-  console.log(location.pathname);
   return (
     <NavBar>
       <p>menu</p>

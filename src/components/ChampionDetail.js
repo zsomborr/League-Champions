@@ -1,7 +1,31 @@
 import { withRouter } from "react-router";
 import { Card, HeaderDiv, DetailDiv, Li } from "../styles/ChampionDetailStyle";
+import { useContext } from "react";
+import { FavouriteContext } from "../contexts/FavouriteContext";
+import { Icon } from "@iconify/react";
+import starIcon from "@iconify-icons/entypo/star";
 
-const championDetail = (props) => {
+const ChampionDetail = (props) => {
+  const [favouriteChampions, setFavouriteChampions] =
+    useContext(FavouriteContext);
+
+  const isChampion = (element) => element === props.location.state.champion;
+
+  const toggleFavouriteChamp = (e) => {
+    e.preventDefault();
+    let index = favouriteChampions.findIndex(isChampion);
+    console.log(index);
+    let changedFavChamps = [...favouriteChampions];
+    index === -1
+      ? (changedFavChamps = [
+          ...changedFavChamps,
+          props.location.state.champion,
+        ])
+      : changedFavChamps.splice(index, 1);
+    console.log(changedFavChamps);
+    setFavouriteChampions(changedFavChamps);
+  };
+
   return (
     <DetailDiv>
       <Card>
@@ -15,6 +39,15 @@ const championDetail = (props) => {
           }_0.jpg`}
         ></img>
         <div>
+          <Icon
+            icon={starIcon}
+            color={
+              favouriteChampions.includes(props.location.state.champion)
+                ? "gold"
+                : "black"
+            }
+            onClick={toggleFavouriteChamp}
+          />
           <HeaderDiv>
             <h2>{props.location.state.champion.name}</h2>
           </HeaderDiv>
@@ -33,7 +66,6 @@ const championDetail = (props) => {
             </table>
             {props.location.state.champion.tags.map((t, index) => (
               <Li key={index}>{t}</Li>
-
             ))}
           </HeaderDiv>
           <br />
@@ -53,7 +85,6 @@ const championDetail = (props) => {
             <Li key="4">
               Difficulty: {props.location.state.champion.info.difficulty}
             </Li>
-
           </HeaderDiv>
         </div>
         <br />
@@ -159,4 +190,4 @@ const championDetail = (props) => {
   );
 };
 
-export default withRouter(championDetail);
+export default withRouter(ChampionDetail);
