@@ -33,6 +33,7 @@ const championDetail = (props) => {
             </table>
             {props.location.state.champion.tags.map((t, index) => (
               <Li key={index}>{t}</Li>
+
             ))}
           </HeaderDiv>
           <br />
@@ -52,6 +53,7 @@ const championDetail = (props) => {
             <Li key="4">
               Difficulty: {props.location.state.champion.info.difficulty}
             </Li>
+
           </HeaderDiv>
         </div>
         <br />
