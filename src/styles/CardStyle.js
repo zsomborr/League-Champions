@@ -24,7 +24,7 @@ export const CardContainer = styled.div`
   &:hover {
     box-shadow: 0 10px 18px 5px #000;
     background-color: ${(props) =>
-      props.theme.backgroundColor === "#d3b509" ? "#ffdb0e" : "#3888aa;"};
+      props.theme.backgroundColor === "#d3b509" ? "#ffdb0e" : "#3888aa"};
     color: white;
   }
 `;
