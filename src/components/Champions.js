@@ -9,9 +9,9 @@ const Champions = (props) => {
     const getChampions = async () => {
       const championsFromApi = await fetchChampions();
       const search = props.location.search;
-      let taggedChampions = [];
       const params = new URLSearchParams(search);
       const tag = params.get("tag");
+      let taggedChampions = [];
       if (tag !== null) {
         Object.entries(championsFromApi).map((e) =>
           e[1].tags.map((t) => t === tag && taggedChampions.push(e[1]))
@@ -49,6 +49,26 @@ const Champions = (props) => {
     };
     getFreeChampions();
   }, []);
+
+  // const fetchFreeChampions = async () => {
+  //   let myHeaders = new Headers();
+  //   myHeaders.append("X-Riot-Token", process.env.REACT_APP_RG_API_KEY);
+  //   myHeaders.append("Origin", "http://localhost:3000");
+
+  //   let requestOptions = {
+  //     method: "GET",
+  //     headers: myHeaders,
+  //     redirect: "follow",
+  //   };
+
+  //   const data = await fetch(
+  //     "https://eun1.api.riotgames.com/lol/platform/v3/champion-rotations",
+  //     requestOptions
+  //   ).then((r) => r.json());
+  //   // const data = await res.json();
+  //   console.log(data);
+  //   return data.freeChampionIds;
+  // };
 
   const fetchChampions = async () => {
     const res = await fetch(
