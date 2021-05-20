@@ -1,5 +1,10 @@
 import { withRouter } from "react-router";
-import { Card, HeaderDiv, DetailDiv, Li } from "../styles/ChampionDetailStyle";
+import {
+  CardDetail,
+  HeaderDiv,
+  DetailDiv,
+  Li,
+} from "../styles/ChampionDetailStyle";
 import { useContext } from "react";
 import { FavouriteContext } from "../contexts/FavouriteContext";
 import { Icon } from "@iconify/react";
@@ -27,7 +32,7 @@ const ChampionDetail = (props) => {
 
   return (
     <DetailDiv>
-      <Card>
+      <CardDetail>
         <img
           width="350px"
           alt="test"
@@ -91,8 +96,8 @@ const ChampionDetail = (props) => {
         <br />
         {props.location.state.champion.blurb}
         <br />
-      </Card>
-      <Card>
+      </CardDetail>
+      <CardDetail>
         <table>
           <thead>
             <tr>
@@ -186,7 +191,7 @@ const ChampionDetail = (props) => {
             </tr>
           </tbody>
         </table>
-      </Card>
+      </CardDetail>
     </DetailDiv>
   );
 };
