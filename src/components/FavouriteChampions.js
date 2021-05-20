@@ -3,6 +3,7 @@ import { FavouriteContext } from "../contexts/FavouriteContext";
 import Champion from "./Champion";
 
 const FavouriteChampions = () => {
+  // eslint-disable-next-line no-unused-vars
   const [favouriteChampions, setFavouriteChampions] =
     useContext(FavouriteContext);
 
