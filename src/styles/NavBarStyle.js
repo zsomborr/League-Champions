@@ -1,17 +1,23 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+export const Li = styled.li`
+  float: left;
+`;
+
+export const Ul = styled.ul`
+  list-style-type: none;
+  overflow: hidden;
+  background-color: #d3b509;
+`;
+
 export const NavLink = styled(Link)`
   display: block;
-  color: ${(props) => props.theme.color};
+  color: #2c5d72;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   &:hover {
-    background-color: ${(props) => props.theme.hoverColor};
+    background-color: #ffdb0e;
   }
-`;
-
-export const NavBar = styled.div`
-  background-color: #d3b509;
 `;
