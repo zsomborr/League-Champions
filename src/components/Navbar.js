@@ -1,4 +1,4 @@
-import { NavBar } from "../styles/NavBarStyle";
+import { Ul, Li, NavLink } from "../styles/NavBarStyle";
 import Tags from "./Tags";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -6,10 +6,15 @@ import { useEffect } from "react";
 const Navbar = () => {
   const location = useLocation();
   return (
-    <NavBar>
-      <p>menu</p>
-      {location.pathname === "/champions" ? <Tags /> : null}
-    </NavBar>
+    <Ul>
+      <Li>
+        <NavLink to="/champions">Main Page</NavLink>
+      </Li>
+      <Li>
+        <NavLink to="/favouriteChampions">Favourites</NavLink>
+      </Li>
+      <Li>{location.pathname === "/champions" ? <Tags /> : null}</Li>
+    </Ul>
   );
 };
 
