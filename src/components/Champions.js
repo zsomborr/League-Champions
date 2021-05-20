@@ -14,7 +14,7 @@ const Champions = (props) => {
       const tag = params.get("tag");
       if (tag !== null) {
         Object.entries(championsFromApi).map((e) =>
-          e[1].tags.map((t) => (t === tag ? taggedChampions.push(e[1]) : null))
+          e[1].tags.map((t) => t === tag && taggedChampions.push(e[1]))
         );
       } else {
         taggedChampions = Object.entries(championsFromApi).map((e) => e[1]);

@@ -21,3 +21,11 @@ export const NavLink = styled(Link)`
     background-color: #ffdb0e;
   }
 `;
+
+export const InputBar = styled.input`
+  display: block;
+  color: #2c5d72;
+  text-align: left;
+  margin: 14px 16px;
+  text-decoration: none;
+`;
