@@ -9,12 +9,12 @@ const ChampionDetail = (props) => {
   const [favouriteChampions, setFavouriteChampions] =
     useContext(FavouriteContext);
 
-  const isChampion = (element) => element === props.location.state.champion;
+  const isChampion = (element) =>
+    element.key === props.location.state.champion.key;
 
   const toggleFavouriteChamp = (e) => {
     e.preventDefault();
     let index = favouriteChampions.findIndex(isChampion);
-    console.log(index);
     let changedFavChamps = [...favouriteChampions];
     index === -1
       ? (changedFavChamps = [
@@ -22,7 +22,6 @@ const ChampionDetail = (props) => {
           props.location.state.champion,
         ])
       : changedFavChamps.splice(index, 1);
-    console.log(changedFavChamps);
     setFavouriteChampions(changedFavChamps);
   };
 
@@ -42,8 +41,10 @@ const ChampionDetail = (props) => {
           <Icon
             icon={starIcon}
             color={
-              favouriteChampions.includes(props.location.state.champion)
-                ? "gold"
+              favouriteChampions
+                .map((favouriteChampion) => favouriteChampion.key)
+                .includes(props.location.state.champion.key)
+                ? "#d3b509"
                 : "black"
             }
             onClick={toggleFavouriteChamp}

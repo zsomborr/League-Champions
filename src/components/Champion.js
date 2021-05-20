@@ -3,7 +3,7 @@ import { Card, CardContainer } from "../styles/CardStyle.js";
 import { ThemeProvider } from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import { FavouriteContext } from "../contexts/FavouriteContext";
-import { Icon, InlineIcon } from "@iconify/react";
+import { Icon } from "@iconify/react";
 import starIcon from "@iconify-icons/entypo/star";
 
 const Champion = ({ champion, freeChampions }) => {
@@ -29,17 +29,14 @@ const Champion = ({ champion, freeChampions }) => {
         }));
   }, [champion.key, freeChampions]);
 
-  const isChampion = (element) => element === champion;
+  const isChampion = (element) => element.key === champion.key;
 
   const toggleFavouriteChamp = (e) => {
-    e.preventDefault();
     let index = favouriteChampions.findIndex(isChampion);
-    console.log(index);
     let changedFavChamps = [...favouriteChampions];
     index === -1
       ? (changedFavChamps = [...changedFavChamps, champion])
       : changedFavChamps.splice(index, 1);
-    console.log(changedFavChamps);
     setFavouriteChampions(changedFavChamps);
   };
 
@@ -48,7 +45,13 @@ const Champion = ({ champion, freeChampions }) => {
       <CardContainer>
         <Icon
           icon={starIcon}
-          color={favouriteChampions.includes(champion) ? theme.color : "black"}
+          color={
+            favouriteChampions
+              .map((favouriteChampion) => favouriteChampion.key)
+              .includes(champion.key)
+              ? theme.color
+              : "black"
+          }
           onClick={toggleFavouriteChamp}
         />
         <Link
