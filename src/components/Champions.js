@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Champion from "./Champion.js";
+import {API_BASE_URL} from '../constants';
 
 const Champions = (props) => {
   const [champions, setChampions] = useState([]);
@@ -27,48 +28,47 @@ const Champions = (props) => {
 
   useEffect(() => {
     const getFreeChampions = async () => {
-      // const championsFromApi = await fetchFreeChampions();
-      const championsFromApi = [
-        "9",
-        "13",
-        "29",
-        "33",
-        "42",
-        "43",
-        "60",
-        "67",
-        "86",
-        "103",
-        "104",
-        "112",
-        "122",
-        "245",
-        "267",
-      ];
+      const championsFromApi = await fetchFreeChampions();
+      // const championsFromApi = [
+      //   "9",
+      //   "13",
+      //   "29",
+      //   "33",
+      //   "42",
+      //   "43",
+      //   "60",
+      //   "67",
+      //   "86",
+      //   "103",
+      //   "104",
+      //   "112",
+      //   "122",
+      //   "245",
+      //   "267",
+      // ];
       setFreeChampions(championsFromApi);
     };
     getFreeChampions();
   }, []);
 
-  // const fetchFreeChampions = async () => {
-  //   let myHeaders = new Headers();
-  //   myHeaders.append("X-Riot-Token", process.env.REACT_APP_RG_API_KEY);
-  //   myHeaders.append("Origin", "http://localhost:3000");
+  const fetchFreeChampions = async () => {
+    let myHeaders = new Headers();
+    myHeaders.append("X-Riot-Token", 'RGAPI-a77e5e3e-5ead-4b67-b827-7ac6aeadcc13');
 
-  //   let requestOptions = {
-  //     method: "GET",
-  //     headers: myHeaders,
-  //     redirect: "follow",
-  //   };
+    let requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
 
-  //   const data = await fetch(
-  //     "https://eun1.api.riotgames.com/lol/platform/v3/champion-rotations",
-  //     requestOptions
-  //   ).then((r) => r.json());
-  //   // const data = await res.json();
-  //   console.log(data);
-  //   return data.freeChampionIds;
-  // };
+    const data = await fetch(
+      `${API_BASE_URL}/champion-rotations`,
+      requestOptions
+    ).then((r) => r.json());
+    // const data = await res.json();
+    console.log(data);
+    return data.freeChampionIds;
+  };
 
   const fetchChampions = async () => {
     const res = await fetch(

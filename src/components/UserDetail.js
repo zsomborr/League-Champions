@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { UserCard, MatchCard, H1 } from "../styles/UserDetailStyle.js";
 import icon from "../static/icon.png";
+import {API_BASE_URL} from '../constants';
 
 const UserDetail = (props) => {
   const search = props.location.search;
@@ -45,18 +46,18 @@ const UserDetail = (props) => {
   };
 
   const fetchUserInfo = async () => {
-    // const res = await fetch(
-    //   `https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${user}`
-    // );
-    // const userData = await res.json();
+    const res = await fetch(
+      `${API_BASE_URL}/summoners/by-name/${user}`
+    );
+    const userData = await res.json();
 
-    // user info API
-    const userData = {
-      name: "bodisB",
-      profileIconId: 4607,
-      summonerLevel: 269,
-    };
-
+    // // user info API
+    // const userData = {
+    //   name: "bodisB",
+    //   profileIconId: 4607,
+    //   summonerLevel: 269,
+    // };
+    //
     return userData;
   };
 
