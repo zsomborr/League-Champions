@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Champion from "./Champion.js";
-import {API_BASE_URL} from '../constants';
+import { API_BASE_URL } from "../constants";
 
 const Champions = (props) => {
   const [champions, setChampions] = useState([]);
@@ -29,51 +29,19 @@ const Champions = (props) => {
   useEffect(() => {
     const getFreeChampions = async () => {
       const championsFromApi = await fetchFreeChampions();
-      // const championsFromApi = [
-      //   "9",
-      //   "13",
-      //   "29",
-      //   "33",
-      //   "42",
-      //   "43",
-      //   "60",
-      //   "67",
-      //   "86",
-      //   "103",
-      //   "104",
-      //   "112",
-      //   "122",
-      //   "245",
-      //   "267",
-      // ];
       setFreeChampions(championsFromApi);
     };
     getFreeChampions();
   }, []);
 
   const fetchFreeChampions = async () => {
-    let myHeaders = new Headers();
-    myHeaders.append("X-Riot-Token", 'RGAPI-a77e5e3e-5ead-4b67-b827-7ac6aeadcc13');
-
-    let requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    const data = await fetch(
-      `${API_BASE_URL}/champion-rotations`,
-      requestOptions
-    ).then((r) => r.json());
-    // const data = await res.json();
+    const data = await fetch(`${API_BASE_URL}/free`).then((r) => r.json());
     console.log(data);
     return data.freeChampionIds;
   };
 
   const fetchChampions = async () => {
-    const res = await fetch(
-      "http://ddragon.leagueoflegends.com/cdn/11.10.1/data/en_US/champion.json"
-    );
+    const res = await fetch(`${API_BASE_URL}/champions`);
     const data = await res.json();
     return data.data;
   };

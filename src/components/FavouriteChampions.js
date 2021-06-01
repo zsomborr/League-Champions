@@ -1,29 +1,27 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FavouriteContext } from "../contexts/FavouriteContext";
 import Champion from "./Champion";
+import { API_BASE_URL } from "../constants";
 
 const FavouriteChampions = () => {
   // eslint-disable-next-line no-unused-vars
   const [favouriteChampions, setFavouriteChampions] =
     useContext(FavouriteContext);
+  const [freeChampions, setFreeChampions] = useState([]);
 
-  const freeChampions = [
-    "9",
-    "13",
-    "29",
-    "33",
-    "42",
-    "43",
-    "60",
-    "67",
-    "86",
-    "103",
-    "104",
-    "112",
-    "122",
-    "245",
-    "267",
-  ];
+  useEffect(() => {
+    const getFreeChampions = async () => {
+      const championsFromApi = await fetchFreeChampions();
+      setFreeChampions(championsFromApi);
+    };
+    getFreeChampions();
+  }, []);
+
+  const fetchFreeChampions = async () => {
+    const data = await fetch(`${API_BASE_URL}/free`).then((r) => r.json());
+    console.log(data);
+    return data.freeChampionIds;
+  };
 
   return (
     <div>
