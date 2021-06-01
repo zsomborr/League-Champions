@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { UserCard, MatchCard, H1 } from "../styles/UserDetailStyle.js";
 import icon from "../static/icon.png";
-import {API_BASE_URL} from '../constants';
+import { API_BASE_URL } from "../constants";
 
 const UserDetail = (props) => {
   const search = props.location.search;
@@ -38,149 +38,29 @@ const UserDetail = (props) => {
   }, [user]);
 
   const fetchChampions = async () => {
-    const res = await fetch(
-      "http://ddragon.leagueoflegends.com/cdn/11.10.1/data/en_US/champion.json"
-    );
+    const res = await fetch(`${API_BASE_URL}/champions`);
     const data = await res.json();
     return data.data;
   };
 
   const fetchUserInfo = async () => {
-    const res = await fetch(
-      `${API_BASE_URL}/summoners/by-name/${user}`
-    );
+    const res = await fetch(`${API_BASE_URL}/user/${user}`);
     const userData = await res.json();
-
-    // // user info API
-    // const userData = {
-    //   name: "bodisB",
-    //   profileIconId: 4607,
-    //   summonerLevel: 269,
-    // };
-    //
     return userData;
   };
 
   const fetchUserMatchDetails = async () => {
     // matches by accountId
-    // const res = await fetch(
-    //   `https://eun1.api.riotgames.com/lol/match/v4/matchlists/by-account/${userInfo.accountId}`
-    // );
-    // const matchDetails = await res.json();
-    const matchDetails = [
-      {
-        gameId: "2837017914",
-        champion: "235",
-      },
-      {
-        gameId: "2836955515",
-        champion: "41",
-      },
-      {
-        gameId: "2836991413",
-        champion: "75",
-      },
-      {
-        gameId: "2836929120",
-        champion: "110",
-      },
-      {
-        gameId: "2836905505",
-        champion: "518",
-      },
-    ];
+    const res = await fetch(`${API_BASE_URL}/matches`);
+    const matchDetails = await res.json();
 
     return matchDetails;
   };
 
   const fetchMatchResult = async () => {
     // match detail by gameId
-    // const res = await fetch(
-    //   `https://eun1.api.riotgames.com/lol/match/v4/matches/${userInfo.accountId}`
-    // );
-    // const matchResult = await res.json();
-    const matchResults = [
-      {
-        gameId: "2837017914",
-        platformId: "EUN1",
-        gameDuration: 974,
-        gameMode: "ARAM",
-        teams: [
-          {
-            teamId: 100,
-            win: "Win",
-          },
-          {
-            teamId: 200,
-            win: "Fail",
-          },
-        ],
-      },
-      {
-        gameId: "2836955515",
-        platformId: "EUN1",
-        gameDuration: 994,
-        gameMode: "ARAM",
-        teams: [
-          {
-            teamId: 100,
-            win: "Fail",
-          },
-          {
-            teamId: 200,
-            win: "Win",
-          },
-        ],
-      },
-      {
-        gameId: "2836991413",
-        platformId: "EUN1",
-        gameDuration: 1358,
-        gameMode: "ARAM",
-        teams: [
-          {
-            teamId: 100,
-            win: "Fail",
-          },
-          {
-            teamId: 200,
-            win: "Win",
-          },
-        ],
-      },
-      {
-        gameId: "2836929120",
-        platformId: "EUN1",
-        gameDuration: 1695,
-        gameMode: "ARAM",
-        teams: [
-          {
-            teamId: 100,
-            win: "Fail",
-          },
-          {
-            teamId: 200,
-            win: "Win",
-          },
-        ],
-      },
-      {
-        gameId: "2836905505",
-        platformId: "EUN1",
-        gameDuration: 1252,
-        gameMode: "ARAM",
-        teams: [
-          {
-            teamId: 100,
-            win: "Win",
-          },
-          {
-            teamId: 200,
-            win: "Fail",
-          },
-        ],
-      },
-    ];
+    const res = await fetch(`${API_BASE_URL}/results`);
+    const matchResults = await res.json();
 
     return matchResults;
   };
