@@ -16,7 +16,7 @@ const Champion = ({ champion, freeChampions }) => {
     useContext(FavouriteContext);
 
   useEffect(() => {
-    freeChampions.includes(champion.key)
+    freeChampions.includes(parseInt(champion.key))
       ? setTheme((oldTheme) => ({
           ...oldTheme,
           color: "#2c5d72",

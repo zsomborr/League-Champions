@@ -31,7 +31,7 @@ const Navbar = () => {
         />
       </Li>
       <Li>
-        <NavLink to={{ pathname: `/userDetail/?user=${text}` }}>
+        <NavLink to={{ pathname: "/userDetail", search: `?user=${text}` }}>
           Search For User
         </NavLink>
       </Li>

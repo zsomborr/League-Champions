@@ -17,23 +17,21 @@ const UserDetail = (props) => {
     const getUserInfo = async () => {
       const userInfoFromApi = await fetchUserInfo();
       setUserInfo(userInfoFromApi);
-    };
-    const getUserMatchDetail = async () => {
+
       const matchDetailFromApi = await fetchUserMatchDetails();
       setUserMatchDetail(matchDetailFromApi);
-    };
-    const getMatchResult = async () => {
+
       const matchResultFromApi = await fetchMatchResult();
       setMatchResult(matchResultFromApi);
     };
+
     const getChampions = async () => {
       let championsFromApi = await fetchChampions();
       championsFromApi = Object.entries(championsFromApi).map((e) => e[1]);
       setChampions(championsFromApi);
     };
+
     getUserInfo();
-    getUserMatchDetail();
-    getMatchResult();
     getChampions();
   }, [user]);
 
@@ -51,7 +49,7 @@ const UserDetail = (props) => {
 
   const fetchUserMatchDetails = async () => {
     // matches by accountId
-    const res = await fetch(`${API_BASE_URL}/matches`);
+    const res = await fetch(`${API_BASE_URL}/match`);
     const matchDetails = await res.json();
 
     return matchDetails;
@@ -77,7 +75,7 @@ const UserDetail = (props) => {
 
       <H1>Last 5 Matches:</H1>
       {matchResult.map((match) => (
-        <MatchCard key={match.gameId}>
+        <MatchCard key={parseInt(match.gameId)}>
           <p>Match duration: {Math.floor(match.gameDuration / 60)} min</p>
           <p>Game mode: {match.gameMode} </p>
           <p>Match Result: {match.teams[0].win}</p>

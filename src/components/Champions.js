@@ -36,7 +36,6 @@ const Champions = (props) => {
 
   const fetchFreeChampions = async () => {
     const data = await fetch(`${API_BASE_URL}/free`).then((r) => r.json());
-    console.log(data);
     return data.freeChampionIds;
   };
 
