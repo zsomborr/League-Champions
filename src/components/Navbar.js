@@ -3,7 +3,12 @@ import Tags from "./Tags";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
-const Navbar = ({ toggleLoginModal, isLoggedIn, onLogout }) => {
+const Navbar = ({
+  toggleLoginModal,
+  toggleRegisterModal,
+  isLoggedIn,
+  onLogout,
+}) => {
   const location = useLocation();
 
   const [text, setText] = useState("");
@@ -18,7 +23,9 @@ const Navbar = ({ toggleLoginModal, isLoggedIn, onLogout }) => {
         <NavLink to="/champions">Main Page</NavLink>
       </Li>
       <Li>
-        <NavLink to="/favouriteChampions">Favourites</NavLink>
+        {sessionStorage.getItem("user") !== null && (
+          <NavLink to="/favouriteChampions">Favourites</NavLink>
+        )}
       </Li>
       <Li>{location.pathname === "/champions" && <Tags />}</Li>
       <Li>
@@ -40,6 +47,11 @@ const Navbar = ({ toggleLoginModal, isLoggedIn, onLogout }) => {
           <NavElement onClick={onLogout}>Logout</NavElement>
         ) : (
           <NavElement onClick={toggleLoginModal}>Login</NavElement>
+        )}
+      </Li>
+      <Li style={{ float: "right" }}>
+        {!isLoggedIn && (
+          <NavElement onClick={toggleRegisterModal}>Register</NavElement>
         )}
       </Li>
     </Ul>
