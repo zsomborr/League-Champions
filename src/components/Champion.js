@@ -43,17 +43,19 @@ const Champion = ({ champion, freeChampions }) => {
   return (
     <ThemeProvider theme={theme}>
       <CardContainer>
-        <Icon
-          icon={starIcon}
-          color={
-            favouriteChampions
-              .map((favouriteChampion) => favouriteChampion.key)
-              .includes(champion.key)
-              ? theme.color
-              : "black"
-          }
-          onClick={toggleFavouriteChamp}
-        />
+        {sessionStorage.getItem("user") !== null && (
+          <Icon
+            icon={starIcon}
+            color={
+              favouriteChampions
+                .map((favouriteChampion) => favouriteChampion.key)
+                .includes(champion.key)
+                ? theme.color
+                : "black"
+            }
+            onClick={toggleFavouriteChamp}
+          />
+        )}
         <Link
           to={{
             pathname: `/championDetail/${champion.key}`,
