@@ -49,7 +49,7 @@ const UserDetail = (props) => {
 
   const fetchUserMatchDetails = async () => {
     // matches by accountId
-    const res = await fetch(`${API_BASE_URL}/match`);
+    const res = await fetch(`${API_BASE_URL}/matches`);
     const matchDetails = await res.json();
 
     return matchDetails;
