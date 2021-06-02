@@ -1,9 +1,9 @@
-import { Ul, Li, NavLink, InputBar } from "../styles/NavBarStyle";
+import { Ul, Li, NavLink, InputBar, NavElement } from "../styles/NavBarStyle";
 import Tags from "./Tags";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ toggleLoginModal, isLoggedIn, onLogout }) => {
   const location = useLocation();
 
   const [text, setText] = useState("");
@@ -34,6 +34,13 @@ const Navbar = () => {
         <NavLink to={{ pathname: "/userDetail", search: `?user=${text}` }}>
           Search For User
         </NavLink>
+      </Li>
+      <Li style={{ float: "right" }}>
+        {isLoggedIn ? (
+          <NavElement onClick={onLogout}>Logout</NavElement>
+        ) : (
+          <NavElement onClick={toggleLoginModal}>Login</NavElement>
+        )}
       </Li>
     </Ul>
   );
