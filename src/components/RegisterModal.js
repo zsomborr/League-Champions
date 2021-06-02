@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import { Modal, ModalContent } from "../styles/ModalStyle.js";
+import { useState } from "react";
 import { API_BASE_URL } from "../constants";
 
-const LoginModal = ({ toggleLoginModal, onLogin }) => {
+const RegisterModal = ({ toggleRegisterModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,22 +14,16 @@ const LoginModal = ({ toggleLoginModal, onLogin }) => {
     setPassword(e.target.value);
   };
 
-  const loginAndSaveUser = (e) => {
-    e.preventDefault();
+  const onRegister = () => {
+    toggleRegisterModal();
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email, password: password }),
     };
-
-    fetch(`${API_BASE_URL}/login`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => data && handleLoggedIn());
-  };
-
-  const handleLoggedIn = () => {
-    sessionStorage.setItem("user", email);
-    onLogin();
+    fetch(`${API_BASE_URL}/register`, requestOptions).then((response) =>
+      console.log(response)
+    );
   };
 
   return (
@@ -37,12 +31,12 @@ const LoginModal = ({ toggleLoginModal, onLogin }) => {
       <ModalContent>
         <button
           style={{ float: "right", backgroundColor: "red", fontWeight: "bold" }}
-          onClick={toggleLoginModal}
+          onClick={toggleRegisterModal}
         >
           X
         </button>
-        <form onSubmit={loginAndSaveUser}>
-          <h3>Sign in</h3>
+        <form onSubmit={onRegister}>
+          <h3>Register</h3>
 
           <div>
             <label>Email address</label>
@@ -66,7 +60,7 @@ const LoginModal = ({ toggleLoginModal, onLogin }) => {
           </div>
 
           <button style={{ marginTop: "15px" }} type="submit">
-            Login
+            Register
           </button>
         </form>
       </ModalContent>
@@ -74,4 +68,4 @@ const LoginModal = ({ toggleLoginModal, onLogin }) => {
   );
 };
 
-export default LoginModal;
+export default RegisterModal;
