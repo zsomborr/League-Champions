@@ -1,4 +1,5 @@
 import { SingleNewsCard, Link, Title, Data } from "../styles/SingleNewsStyle";
+import Comments from "./Comments";
 
 const SingleNews = ({ singleNews }) => {
   return (
@@ -11,6 +12,7 @@ const SingleNews = ({ singleNews }) => {
           <br />
           {singleNews.time_ago}
         </Data>
+        <Comments newsId={singleNews.id} />
       </SingleNewsCard>
     </div>
   );
