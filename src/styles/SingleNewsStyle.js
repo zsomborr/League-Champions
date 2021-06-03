@@ -7,7 +7,7 @@ export const Link = styled.a`
 `;
 
 export const SingleNewsCard = styled.div`
-  opacity: 0.9;
+  opacity: 0.93;
   background-color: #2c5d72;
   color: #d3b509;
   padding: 1%;
@@ -25,4 +25,20 @@ export const Title = styled.div`
 export const Data = styled.div`
   font-size: 0.8rem;
   font-style: italic;
+`;
+
+export const PaginationButton = styled.button`
+  font-size: 0.8rem;
+  font-style: italic;
+  background-color: #2c5d72;
+  color: #d3b509;
+  border-radius: 10px;
+  padding: 1%;
+  margin: 0% 1%;
+  font-weight: 900;
+`;
+
+export const PaginationButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
