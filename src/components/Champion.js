@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import { FavouriteContext } from "../contexts/FavouriteContext";
 import { Icon } from "@iconify/react";
 import starIcon from "@iconify-icons/entypo/star";
+import { UserContext } from "../contexts/UserContext";
 
 const Champion = ({ champion, freeChampions }) => {
   const [theme, setTheme] = useState({
@@ -14,6 +15,8 @@ const Champion = ({ champion, freeChampions }) => {
 
   const [favouriteChampions, setFavouriteChampions] =
     useContext(FavouriteContext);
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useContext(UserContext);
 
   useEffect(() => {
     freeChampions.includes(parseInt(champion.key))
@@ -43,7 +46,7 @@ const Champion = ({ champion, freeChampions }) => {
   return (
     <ThemeProvider theme={theme}>
       <CardContainer>
-        {sessionStorage.getItem("user") !== null && (
+        {user && (
           <Icon
             icon={starIcon}
             color={

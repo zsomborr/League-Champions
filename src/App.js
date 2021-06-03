@@ -9,11 +9,11 @@ import LoginModal from "./components/LoginModal";
 import RegisterModal from "./components/RegisterModal";
 import { useState } from "react";
 import News from "./components/News";
+import { UserProvider } from "./contexts/UserContext";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleLoginModal = () => {
     setShowLogin(!showLogin);
@@ -25,43 +25,40 @@ function App() {
 
   const onLogin = () => {
     toggleLoginModal();
-    setIsLoggedIn(true);
-  };
-
-  const onLogout = () => {
-    setIsLoggedIn(false);
-    sessionStorage.removeItem("user");
   };
 
   return (
-    <FavouriteProvider>
-      <Router>
-        <Navbar
-          toggleLoginModal={toggleLoginModal}
-          toggleRegisterModal={toggleRegisterModal}
-          onLogout={onLogout}
-          isLoggedIn={isLoggedIn}
-        />
-        <Route
-          exact
-          path="/"
-          render={() => {
-            return <Redirect to="/news" />;
-          }}
-        />
-        <Route path="/champions" exact component={Champions} />
-        <Route path="/championDetail/:championId" component={ChampionDetail} />
-        <Route path="/favouriteChampions" component={FavouriteChampions} />
-        <Route path="/userDetail" component={UserDetail} />
-        <Route path="/news" component={News} />
-        {showLogin && (
-          <LoginModal toggleLoginModal={toggleLoginModal} onLogin={onLogin} />
-        )}
-        {showRegister && (
-          <RegisterModal toggleRegisterModal={toggleRegisterModal} />
-        )}
-      </Router>
-    </FavouriteProvider>
+    <UserProvider>
+      <FavouriteProvider>
+        <Router>
+          <Navbar
+            toggleLoginModal={toggleLoginModal}
+            toggleRegisterModal={toggleRegisterModal}
+          />
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return <Redirect to="/news" />;
+            }}
+          />
+          <Route path="/champions" exact component={Champions} />
+          <Route
+            path="/championDetail/:championId"
+            component={ChampionDetail}
+          />
+          <Route path="/favouriteChampions" component={FavouriteChampions} />
+          <Route path="/userDetail" component={UserDetail} />
+          <Route path="/news" component={News} />
+          {showLogin && (
+            <LoginModal toggleLoginModal={toggleLoginModal} onLogin={onLogin} />
+          )}
+          {showRegister && (
+            <RegisterModal toggleRegisterModal={toggleRegisterModal} />
+          )}
+        </Router>
+      </FavouriteProvider>
+    </UserProvider>
   );
 }
 

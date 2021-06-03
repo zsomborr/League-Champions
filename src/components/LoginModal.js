@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, ModalContent } from "../styles/ModalStyle.js";
 import { API_BASE_URL } from "../constants";
+import { UserContext } from "../contexts/UserContext";
 
 const LoginModal = ({ toggleLoginModal, onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useContext(UserContext);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -28,7 +31,7 @@ const LoginModal = ({ toggleLoginModal, onLogin }) => {
   };
 
   const handleLoggedIn = () => {
-    sessionStorage.setItem("user", email);
+    setUser(email);
     onLogin();
   };
 
