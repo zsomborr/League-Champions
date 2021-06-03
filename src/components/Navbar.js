@@ -20,7 +20,10 @@ const Navbar = ({
   return (
     <Ul>
       <Li>
-        <NavLink to="/champions">Main Page</NavLink>
+        <NavLink to="/news">Main Page</NavLink>
+      </Li>
+      <Li>
+        <NavLink to="/champions">Champions</NavLink>
       </Li>
       <Li>
         {sessionStorage.getItem("user") !== null && (

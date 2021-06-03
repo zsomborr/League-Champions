@@ -8,6 +8,7 @@ import UserDetail from "./components/UserDetail";
 import LoginModal from "./components/LoginModal";
 import RegisterModal from "./components/RegisterModal";
 import { useState } from "react";
+import News from "./components/News";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -45,13 +46,14 @@ function App() {
           exact
           path="/"
           render={() => {
-            return <Redirect to="/champions" />;
+            return <Redirect to="/news" />;
           }}
         />
         <Route path="/champions" exact component={Champions} />
         <Route path="/championDetail/:championId" component={ChampionDetail} />
         <Route path="/favouriteChampions" component={FavouriteChampions} />
         <Route path="/userDetail" component={UserDetail} />
+        <Route path="/news" component={News} />
         {showLogin && (
           <LoginModal toggleLoginModal={toggleLoginModal} onLogin={onLogin} />
         )}
