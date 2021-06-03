@@ -1,20 +1,21 @@
 import { Ul, Li, NavLink, InputBar, NavElement } from "../styles/NavBarStyle";
 import Tags from "./Tags";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
-const Navbar = ({
-  toggleLoginModal,
-  toggleRegisterModal,
-  isLoggedIn,
-  onLogout,
-}) => {
+const Navbar = ({ toggleLoginModal, toggleRegisterModal }) => {
   const location = useLocation();
 
   const [text, setText] = useState("");
+  const [user, setUser] = useContext(UserContext);
 
   const handleOnChange = (e) => {
     setText(e.target.value);
+  };
+
+  const onLogout = () => {
+    setUser(null);
   };
 
   return (
@@ -46,14 +47,14 @@ const Navbar = ({
         </NavLink>
       </Li>
       <Li style={{ float: "right" }}>
-        {isLoggedIn ? (
+        {user !== null ? (
           <NavElement onClick={onLogout}>Logout</NavElement>
         ) : (
           <NavElement onClick={toggleLoginModal}>Login</NavElement>
         )}
       </Li>
       <Li style={{ float: "right" }}>
-        {!isLoggedIn && (
+        {user === null && (
           <NavElement onClick={toggleRegisterModal}>Register</NavElement>
         )}
       </Li>
