@@ -16,6 +16,7 @@ const News = () => {
       setNews(newsFromApi);
     };
     getNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber]);
 
   const minPageNum = 1;

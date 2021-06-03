@@ -33,6 +33,7 @@ const UserDetail = (props) => {
 
     getUserInfo();
     getChampions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const fetchChampions = async () => {
@@ -73,7 +74,7 @@ const UserDetail = (props) => {
         <div>Level : {userInfo.summonerLevel}</div>
       </UserCard>
 
-      <H1>Last 5 Matches:</H1>
+      <H1>Last 10 Matches:</H1>
       {matchResult.map((match) => (
         <MatchCard key={parseInt(match.gameId)}>
           <p>Match duration: {Math.floor(match.gameDuration / 60)} min</p>
