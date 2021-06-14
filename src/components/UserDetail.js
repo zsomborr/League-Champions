@@ -39,7 +39,7 @@ const UserDetail = (props) => {
   const fetchChampions = async () => {
     const res = await fetch(`${API_BASE_URL}/champions`);
     const data = await res.json();
-    return data.data;
+    return data.championModels;
   };
 
   const fetchUserInfo = async () => {
@@ -85,7 +85,7 @@ const UserDetail = (props) => {
               matchDetail.gameId === match.gameId &&
               champions.map(
                 (champion) =>
-                  champion.key === matchDetail.champion && (
+                  parseInt(champion.key) === matchDetail.champion && (
                     <div>
                       <p>Played champion:</p>
                       <img

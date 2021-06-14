@@ -8,19 +8,12 @@ const Champions = (props) => {
 
   useEffect(() => {
     const getChampions = async () => {
-      const championsFromApi = await fetchChampions();
       const search = props.location.search;
       const params = new URLSearchParams(search);
       const tag = params.get("tag");
-      let taggedChampions = [];
-      if (tag !== null) {
-        Object.entries(championsFromApi).map((e) =>
-          e[1].tags.map((t) => t === tag && taggedChampions.push(e[1]))
-        );
-      } else {
-        taggedChampions = Object.entries(championsFromApi).map((e) => e[1]);
-      }
-      setChampions(taggedChampions);
+      const championsFromApi = await fetchChampions(tag);
+      console.log(championsFromApi);
+      setChampions(championsFromApi);
     };
 
     getChampions();
@@ -39,10 +32,13 @@ const Champions = (props) => {
     return data.freeChampionIds;
   };
 
-  const fetchChampions = async () => {
-    const res = await fetch(`${API_BASE_URL}/champions`);
+  const fetchChampions = async (tag) => {
+    const res =
+      tag !== null
+        ? await fetch(`${API_BASE_URL}/champions/${tag}`)
+        : await fetch(`${API_BASE_URL}/champions`);
     const data = await res.json();
-    return data.data;
+    return data.championModels;
   };
 
   return (
