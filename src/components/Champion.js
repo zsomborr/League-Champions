@@ -7,7 +7,7 @@ import { Icon } from "@iconify/react";
 import starIcon from "@iconify-icons/entypo/star";
 import { UserContext } from "../contexts/UserContext";
 
-const Champion = ({ champion, freeChampions }) => {
+const Champion = ({ champion }) => {
   const [theme, setTheme] = useState({
     color: "#d3b509",
     backgroundColor: "#2c5d72",
@@ -19,7 +19,7 @@ const Champion = ({ champion, freeChampions }) => {
   const [user, setUser] = useContext(UserContext);
 
   useEffect(() => {
-    freeChampions.includes(parseInt(champion.key))
+    champion.free
       ? setTheme((oldTheme) => ({
           ...oldTheme,
           color: "#2c5d72",
@@ -30,7 +30,7 @@ const Champion = ({ champion, freeChampions }) => {
           color: "#d3b509",
           backgroundColor: "#2c5d72",
         }));
-  }, [champion.key, freeChampions]);
+  }, [champion.key, champion.free]);
 
   const isChampion = (element) => element.key === champion.key;
 

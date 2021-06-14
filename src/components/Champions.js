@@ -4,7 +4,6 @@ import { API_BASE_URL } from "../constants";
 
 const Champions = (props) => {
   const [champions, setChampions] = useState([]);
-  const [freeChampions, setFreeChampions] = useState([]);
 
   useEffect(() => {
     const getChampions = async () => {
@@ -19,19 +18,6 @@ const Champions = (props) => {
     getChampions();
   }, [props.location.search]);
 
-  useEffect(() => {
-    const getFreeChampions = async () => {
-      const championsFromApi = await fetchFreeChampions();
-      setFreeChampions(championsFromApi);
-    };
-    getFreeChampions();
-  }, []);
-
-  const fetchFreeChampions = async () => {
-    const data = await fetch(`${API_BASE_URL}/free`).then((r) => r.json());
-    return data.freeChampionIds;
-  };
-
   const fetchChampions = async (tag) => {
     const res =
       tag !== null
@@ -44,11 +30,7 @@ const Champions = (props) => {
   return (
     <div>
       {champions.map((champion) => (
-        <Champion
-          key={champion.id}
-          champion={champion}
-          freeChampions={freeChampions}
-        />
+        <Champion key={champion.id} champion={champion} />
       ))}
     </div>
   );
