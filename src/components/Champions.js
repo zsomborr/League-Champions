@@ -11,8 +11,8 @@ const Champions = (props) => {
       const search = props.location.search;
       const params = new URLSearchParams(search);
       const tag = params.get("tag");
-      const championsFromApi = await fetchChampions(tag);
-      console.log(championsFromApi);
+      let championsFromApi = await fetchChampions(tag);
+      championsFromApi = Object.entries(championsFromApi).map((e) => e[1]);
       setChampions(championsFromApi);
     };
 
@@ -38,7 +38,7 @@ const Champions = (props) => {
         ? await fetch(`${API_BASE_URL}/champions/${tag}`)
         : await fetch(`${API_BASE_URL}/champions`);
     const data = await res.json();
-    return data.championModels;
+    return data.data;
   };
 
   return (

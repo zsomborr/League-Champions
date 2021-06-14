@@ -39,7 +39,7 @@ const UserDetail = (props) => {
   const fetchChampions = async () => {
     const res = await fetch(`${API_BASE_URL}/champions`);
     const data = await res.json();
-    return data.championModels;
+    return data.data;
   };
 
   const fetchUserInfo = async () => {
