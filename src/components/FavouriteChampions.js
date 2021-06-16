@@ -1,11 +1,35 @@
-import { useContext } from "react";
-import { FavouriteContext } from "../contexts/FavouriteContext";
+import { useEffect, useState, useContext } from "react";
 import Champion from "./Champion";
+import { API_BASE_URL } from "../constants";
+import { UserContext } from "../contexts/UserContext";
 
 const FavouriteChampions = () => {
   // eslint-disable-next-line no-unused-vars
-  const [favouriteChampions, setFavouriteChampions] =
-    useContext(FavouriteContext);
+  const [favouriteChampions, setFavouriteChampions] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useContext(UserContext);
+
+  useEffect(() => {
+    const getFavouriteChampions = async () => {
+      let championsFromApi = await fetchFavouriteChampions();
+      championsFromApi = Object.entries(championsFromApi).map((e) => e[1]);
+      setFavouriteChampions(championsFromApi);
+    };
+
+    getFavouriteChampions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const fetchFavouriteChampions = async () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: user,
+    };
+    const res = await fetch(`${API_BASE_URL}/user/favourites`, requestOptions);
+    const data = await res.json();
+    return data.data;
+  };
 
   return (
     <div>

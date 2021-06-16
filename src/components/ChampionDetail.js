@@ -6,28 +6,28 @@ import {
   Li,
 } from "../styles/ChampionDetailStyle";
 import { useContext } from "react";
-import { FavouriteContext } from "../contexts/FavouriteContext";
 import { Icon } from "@iconify/react";
 import starIcon from "@iconify-icons/entypo/star";
+import { API_BASE_URL } from "../constants";
+import { UserContext } from "../contexts/UserContext";
 
 const ChampionDetail = (props) => {
-  const [favouriteChampions, setFavouriteChampions] =
-    useContext(FavouriteContext);
-
-  const isChampion = (element) =>
-    element.key === props.location.state.champion.key;
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useContext(UserContext);
 
   const toggleFavouriteChamp = (e) => {
     e.preventDefault();
-    let index = favouriteChampions.findIndex(isChampion);
-    let changedFavChamps = [...favouriteChampions];
-    index === -1
-      ? (changedFavChamps = [
-          ...changedFavChamps,
-          props.location.state.champion,
-        ])
-      : changedFavChamps.splice(index, 1);
-    setFavouriteChampions(changedFavChamps);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: user,
+        championId: props.location.state.champion.key,
+      }),
+    };
+    fetch(`${API_BASE_URL}/user/update-favourite`, requestOptions);
+    props.location.state.champion.favourite =
+      !props.location.state.champion.favourite;
   };
 
   return (
@@ -46,11 +46,7 @@ const ChampionDetail = (props) => {
           <Icon
             icon={starIcon}
             color={
-              favouriteChampions
-                .map((favouriteChampion) => favouriteChampion.key)
-                .includes(props.location.state.champion.key)
-                ? "#d3b509"
-                : "black"
+              props.location.state.champion.favourite ? "#d3b509" : "black"
             }
             onClick={toggleFavouriteChamp}
           />

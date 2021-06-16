@@ -2,19 +2,16 @@ import { Link } from "react-router-dom";
 import { Card, CardContainer } from "../styles/CardStyle.js";
 import { ThemeProvider } from "styled-components";
 import { useState, useEffect, useContext } from "react";
-import { FavouriteContext } from "../contexts/FavouriteContext";
 import { Icon } from "@iconify/react";
 import starIcon from "@iconify-icons/entypo/star";
 import { UserContext } from "../contexts/UserContext";
+import { API_BASE_URL } from "../constants";
 
 const Champion = ({ champion }) => {
   const [theme, setTheme] = useState({
     color: "#d3b509",
     backgroundColor: "#2c5d72",
   });
-
-  const [favouriteChampions, setFavouriteChampions] =
-    useContext(FavouriteContext);
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(UserContext);
 
@@ -32,15 +29,16 @@ const Champion = ({ champion }) => {
         }));
   }, [champion.key, champion.free]);
 
-  const isChampion = (element) => element.key === champion.key;
-
   const toggleFavouriteChamp = (e) => {
-    let index = favouriteChampions.findIndex(isChampion);
-    let changedFavChamps = [...favouriteChampions];
-    index === -1
-      ? (changedFavChamps = [...changedFavChamps, champion])
-      : changedFavChamps.splice(index, 1);
-    setFavouriteChampions(changedFavChamps);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: user, championId: champion.key }),
+    };
+    fetch(`${API_BASE_URL}/user/update-favourite`, requestOptions);
+
+    champion.favourite = !champion.favourite;
+    e.target.color = champion.favourite ? theme.color : "black";
   };
 
   return (
@@ -49,13 +47,7 @@ const Champion = ({ champion }) => {
         {user && (
           <Icon
             icon={starIcon}
-            color={
-              favouriteChampions
-                .map((favouriteChampion) => favouriteChampion.key)
-                .includes(champion.key)
-                ? theme.color
-                : "black"
-            }
+            color={champion.favourite ? theme.color : "black"}
             onClick={toggleFavouriteChamp}
           />
         )}

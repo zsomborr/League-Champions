@@ -43,14 +43,14 @@ const UserDetail = (props) => {
   };
 
   const fetchUserInfo = async () => {
-    const res = await fetch(`${API_BASE_URL}/user/${user}`);
+    const res = await fetch(`${API_BASE_URL}/riot/${user}`);
     const userData = await res.json();
     return userData;
   };
 
   const fetchUserMatchDetails = async () => {
     // matches by accountId
-    const res = await fetch(`${API_BASE_URL}/matches`);
+    const res = await fetch(`${API_BASE_URL}/riot/matches`);
     const matchDetails = await res.json();
 
     return matchDetails;
@@ -58,7 +58,7 @@ const UserDetail = (props) => {
 
   const fetchMatchResult = async () => {
     // match detail by gameId
-    const res = await fetch(`${API_BASE_URL}/results`);
+    const res = await fetch(`${API_BASE_URL}/riot/results`);
     const matchResults = await res.json();
 
     return matchResults;
