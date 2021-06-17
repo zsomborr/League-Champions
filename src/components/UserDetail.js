@@ -90,7 +90,6 @@ const UserDetail = (props) => {
                     <div>
                       <p>Played champion:</p>
                       <img
-                        key={match.gameId}
                         width="100%"
                         alt="test"
                         src={`https://ddragon.canisback.com/img/champion/tiles/${

@@ -44,7 +44,9 @@ const Navbar = ({ toggleLoginModal, toggleRegisterModal }) => {
       </Li>
       <Li style={{ float: "right" }}>
         {user !== null ? (
-          <NavElement onClick={onLogout}>Logout</NavElement>
+          <NavLink to="/champions" onClick={onLogout}>
+            Logout
+          </NavLink>
         ) : (
           <NavElement onClick={toggleLoginModal}>Login</NavElement>
         )}

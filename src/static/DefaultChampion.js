@@ -23,7 +23,7 @@ export const defaultChamp = {
   },
   partype: "No part",
   name: "No Champions Available",
-  id: "No",
+  id: "0",
   title: "No Champions Available",
   blurb: "No blurb",
   version: "0",
