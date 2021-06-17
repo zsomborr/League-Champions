@@ -8,7 +8,7 @@ const UserDetail = (props) => {
   const params = new URLSearchParams(search);
   const user = params.get("user");
 
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const [userMatchDetail, setUserMatchDetail] = useState([]);
   const [matchResult, setMatchResult] = useState([]);
   const [champions, setChampions] = useState([]);
@@ -16,6 +16,7 @@ const UserDetail = (props) => {
   useEffect(() => {
     const getUserInfo = async () => {
       const userInfoFromApi = await fetchUserInfo();
+
       setUserInfo(userInfoFromApi);
 
       const matchDetailFromApi = await fetchUserMatchDetails();

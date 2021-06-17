@@ -3,9 +3,11 @@ import Champion from "./Champion";
 import { API_BASE_URL } from "../constants";
 import { UserContext } from "../contexts/UserContext";
 
+import { defaultChamp } from "../static/DefaultChampion";
+
 const FavouriteChampions = () => {
   // eslint-disable-next-line no-unused-vars
-  const [favouriteChampions, setFavouriteChampions] = useState([]);
+  const [favouriteChampions, setFavouriteChampions] = useState([defaultChamp]);
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(UserContext);
 
@@ -18,7 +20,7 @@ const FavouriteChampions = () => {
 
     getFavouriteChampions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [favouriteChampions]);
 
   const fetchFavouriteChampions = async () => {
     const requestOptions = {

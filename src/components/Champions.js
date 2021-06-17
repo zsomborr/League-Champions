@@ -2,9 +2,10 @@ import { useEffect, useState, useContext } from "react";
 import Champion from "./Champion.js";
 import { API_BASE_URL } from "../constants";
 import { UserContext } from "../contexts/UserContext";
+import { defaultChamp } from "../static/DefaultChampion";
 
 const Champions = (props) => {
-  const [champions, setChampions] = useState([]);
+  const [champions, setChampions] = useState([defaultChamp]);
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(UserContext);
 
@@ -15,6 +16,7 @@ const Champions = (props) => {
       const tag = params.get("tag");
       let championsFromApi = await fetchChampions(tag);
       championsFromApi = Object.entries(championsFromApi).map((e) => e[1]);
+      console.log(championsFromApi);
       setChampions(championsFromApi);
     };
 
