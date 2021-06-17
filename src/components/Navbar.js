@@ -26,11 +26,7 @@ const Navbar = ({ toggleLoginModal, toggleRegisterModal }) => {
       <Li>
         <NavLink to="/champions">Champions</NavLink>
       </Li>
-      <Li>
-        {sessionStorage.getItem("user") !== null && (
-          <NavLink to="/favouriteChampions">Favourites</NavLink>
-        )}
-      </Li>
+      <Li>{user && <NavLink to="/favouriteChampions">Favourites</NavLink>}</Li>
       <Li>{location.pathname === "/champions" && <Tags />}</Li>
       <Li>
         <InputBar
@@ -48,7 +44,9 @@ const Navbar = ({ toggleLoginModal, toggleRegisterModal }) => {
       </Li>
       <Li style={{ float: "right" }}>
         {user !== null ? (
-          <NavElement onClick={onLogout}>Logout</NavElement>
+          <NavLink to="/champions" onClick={onLogout}>
+            Logout
+          </NavLink>
         ) : (
           <NavElement onClick={toggleLoginModal}>Login</NavElement>
         )}

@@ -8,7 +8,7 @@ const UserDetail = (props) => {
   const params = new URLSearchParams(search);
   const user = params.get("user");
 
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const [userMatchDetail, setUserMatchDetail] = useState([]);
   const [matchResult, setMatchResult] = useState([]);
   const [champions, setChampions] = useState([]);
@@ -16,6 +16,7 @@ const UserDetail = (props) => {
   useEffect(() => {
     const getUserInfo = async () => {
       const userInfoFromApi = await fetchUserInfo();
+
       setUserInfo(userInfoFromApi);
 
       const matchDetailFromApi = await fetchUserMatchDetails();
@@ -43,14 +44,14 @@ const UserDetail = (props) => {
   };
 
   const fetchUserInfo = async () => {
-    const res = await fetch(`${API_BASE_URL}/user/${user}`);
+    const res = await fetch(`${API_BASE_URL}/riot/${user}`);
     const userData = await res.json();
     return userData;
   };
 
   const fetchUserMatchDetails = async () => {
     // matches by accountId
-    const res = await fetch(`${API_BASE_URL}/matches`);
+    const res = await fetch(`${API_BASE_URL}/riot/matches`);
     const matchDetails = await res.json();
 
     return matchDetails;
@@ -58,7 +59,7 @@ const UserDetail = (props) => {
 
   const fetchMatchResult = async () => {
     // match detail by gameId
-    const res = await fetch(`${API_BASE_URL}/results`);
+    const res = await fetch(`${API_BASE_URL}/riot/results`);
     const matchResults = await res.json();
 
     return matchResults;
@@ -89,7 +90,6 @@ const UserDetail = (props) => {
                     <div>
                       <p>Played champion:</p>
                       <img
-                        key={match.gameId}
                         width="100%"
                         alt="test"
                         src={`https://ddragon.canisback.com/img/champion/tiles/${
