@@ -5,7 +5,7 @@ import {
   DetailDiv,
   Li,
 } from "../styles/ChampionDetailStyle";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Icon } from "@iconify/react";
 import starIcon from "@iconify-icons/entypo/star";
 import { API_BASE_URL } from "../constants";
@@ -14,6 +14,9 @@ import { UserContext } from "../contexts/UserContext";
 const ChampionDetail = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(UserContext);
+  const [favourite, setFavourite] = useState(
+    props.location.state.champion.favourite
+  );
 
   const toggleFavouriteChamp = (e) => {
     e.preventDefault();
@@ -28,6 +31,7 @@ const ChampionDetail = (props) => {
     fetch(`${API_BASE_URL}/user/update-favourite`, requestOptions);
     props.location.state.champion.favourite =
       !props.location.state.champion.favourite;
+    setFavourite(props.location.state.champion.favourite);
   };
 
   return (
@@ -45,9 +49,7 @@ const ChampionDetail = (props) => {
         <div>
           <Icon
             icon={starIcon}
-            color={
-              props.location.state.champion.favourite ? "#d3b509" : "black"
-            }
+            color={favourite ? "#d3b509" : "black"}
             onClick={toggleFavouriteChamp}
           />
           <HeaderDiv>

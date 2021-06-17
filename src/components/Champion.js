@@ -14,6 +14,7 @@ const Champion = ({ champion }) => {
   });
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(UserContext);
+  const [favourite, setFavourite] = useState(champion.favourite);
 
   useEffect(() => {
     champion.free
@@ -29,16 +30,15 @@ const Champion = ({ champion }) => {
         }));
   }, [champion.key, champion.free]);
 
-  const toggleFavouriteChamp = (e) => {
+  const toggleFavouriteChamp = () => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: user, championId: champion.key }),
     };
     fetch(`${API_BASE_URL}/user/update-favourite`, requestOptions);
-
     champion.favourite = !champion.favourite;
-    e.target.color = champion.favourite ? theme.color : "black";
+    setFavourite(champion.favourite);
   };
 
   return (
@@ -47,7 +47,7 @@ const Champion = ({ champion }) => {
         {user && (
           <Icon
             icon={starIcon}
-            color={champion.favourite ? theme.color : "black"}
+            color={favourite ? theme.color : "black"}
             onClick={toggleFavouriteChamp}
           />
         )}
@@ -60,7 +60,7 @@ const Champion = ({ champion }) => {
           <Card>
             <img
               width="100%"
-              alt="test"
+              alt="Not found"
               src={`https://ddragon.canisback.com/img/champion/tiles/${
                 champion.id === "Fiddlesticks" ? "FiddleSticks" : champion.id
               }_0.jpg`}
