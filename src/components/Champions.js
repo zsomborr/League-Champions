@@ -16,13 +16,15 @@ const Champions = (props) => {
       const tag = params.get("tag");
       let championsFromApi = await fetchChampions(tag);
       championsFromApi = Object.entries(championsFromApi).map((e) => e[1]);
-      console.log(championsFromApi);
       setChampions(championsFromApi);
     };
-
     getChampions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location.search]);
+  }, [props.location.search, user]);
+
+  const toggleUpdate = () => {
+    console.log("Thanks for help Rudi");
+  };
 
   const fetchChampions = async (tag) => {
     let res;
@@ -50,7 +52,11 @@ const Champions = (props) => {
   return (
     <div>
       {champions.map((champion) => (
-        <Champion key={champion.id} champion={champion} />
+        <Champion
+          key={champion.id}
+          champion={champion}
+          toggleUpdate={toggleUpdate}
+        />
       ))}
     </div>
   );

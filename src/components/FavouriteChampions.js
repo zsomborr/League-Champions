@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import Champion from "./Champion";
 import { API_BASE_URL } from "../constants";
 import { UserContext } from "../contexts/UserContext";
-
 import { defaultChamp } from "../static/DefaultChampion";
 
 const FavouriteChampions = () => {
@@ -10,6 +9,7 @@ const FavouriteChampions = () => {
   const [favouriteChampions, setFavouriteChampions] = useState([defaultChamp]);
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(UserContext);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     const getFavouriteChampions = async () => {
@@ -20,7 +20,11 @@ const FavouriteChampions = () => {
 
     getFavouriteChampions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [favouriteChampions]);
+  }, [user, update]);
+
+  const toggleUpdate = () => {
+    setUpdate(!update);
+  };
 
   const fetchFavouriteChampions = async () => {
     const requestOptions = {
@@ -36,7 +40,11 @@ const FavouriteChampions = () => {
   return (
     <div>
       {favouriteChampions.map((champion) => (
-        <Champion key={champion.id} champion={champion} />
+        <Champion
+          key={champion.id}
+          champion={champion}
+          toggleUpdate={toggleUpdate}
+        />
       ))}
     </div>
   );
