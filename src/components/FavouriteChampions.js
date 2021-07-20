@@ -1,25 +1,40 @@
-import { useContext, useEffect, useState } from "react";
-import { FavouriteContext } from "../contexts/FavouriteContext";
+import { useEffect, useState, useContext } from "react";
 import Champion from "./Champion";
 import { API_BASE_URL } from "../constants";
+import { UserContext } from "../contexts/UserContext";
+import { defaultChamp } from "../static/DefaultChampion";
 
 const FavouriteChampions = () => {
   // eslint-disable-next-line no-unused-vars
-  const [favouriteChampions, setFavouriteChampions] =
-    useContext(FavouriteContext);
-  const [freeChampions, setFreeChampions] = useState([]);
+  const [favouriteChampions, setFavouriteChampions] = useState([defaultChamp]);
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useContext(UserContext);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    const getFreeChampions = async () => {
-      const championsFromApi = await fetchFreeChampions();
-      setFreeChampions(championsFromApi);
+    const getFavouriteChampions = async () => {
+      let championsFromApi = await fetchFavouriteChampions();
+      championsFromApi = Object.entries(championsFromApi).map((e) => e[1]);
+      setFavouriteChampions(championsFromApi);
     };
-    getFreeChampions();
-  }, []);
 
-  const fetchFreeChampions = async () => {
-    const data = await fetch(`${API_BASE_URL}/free`).then((r) => r.json());
-    return data.freeChampionIds;
+    getFavouriteChampions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, update]);
+
+  const toggleUpdate = () => {
+    setUpdate(!update);
+  };
+
+  const fetchFavouriteChampions = async () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: user,
+    };
+    const res = await fetch(`${API_BASE_URL}/user/favourites`, requestOptions);
+    const data = await res.json();
+    return data.data;
   };
 
   return (
@@ -28,7 +43,7 @@ const FavouriteChampions = () => {
         <Champion
           key={champion.id}
           champion={champion}
-          freeChampions={freeChampions}
+          toggleUpdate={toggleUpdate}
         />
       ))}
     </div>

@@ -25,13 +25,13 @@ const Comments = ({ newsId }) => {
     const data = [
       {
         id: 1,
-        newsId: 27379726,
-        text: "Ez így sosem fog működni",
+        newsId: 27391676,
+        text: "Test 1",
       },
       {
         id: 2,
-        newsId: 27379726,
-        text: "De, ez működni fog",
+        newsId: 27391676,
+        text: "Test 2",
       },
     ];
     return data;

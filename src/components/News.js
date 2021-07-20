@@ -7,7 +7,16 @@ import {
 } from "../styles/SingleNewsStyle";
 
 const News = () => {
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState([
+    {
+      id: 27537659,
+      title: "No news available",
+      user: "No user",
+      time_ago: "Right now",
+      domain: "nothing.com",
+      url: "https://hu.wikipedia.org/wiki/404-es_hiba",
+    },
+  ]);
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {

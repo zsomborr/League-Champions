@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# League Champions
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About the project
 
-## Available Scripts
+This is a web application for people that are interested in League of Legends.It has details about in-game characterts, matches and users.
+The frontend and the backend is separated into different repositories.The backend repository is here: https://github.com/zsomborr/league-backend-java-spring
 
-In the project directory, you can run:
+## Motivation
 
-### `npm start`
+As we like the game *League of Legends*, we wanted to make a project related to it. We wanted to make something that can be usefull for the players, so our data comes from official API-s that refreshes continuously.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* __Java__ as base backend programming language.
+* __PostgreSQL__ for storing and handling data.
+* __Java Persistence API__ for communicating with the database.
+* __Spring Boot__ as a backend framework.
+* __Javascript__ as base frontend programming language.
+* __React__ as a frontend framework.
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* You can read the latest news from *Hacker News*.
+* You can see the characters and its stats on a detail page.
+* You can see the currently free characters.
+* You can filter characters by their tags.
+* You can check a user's match history.
+* You can log in and then mark a character as your favourite or add comments to news.
 
-### `npm run build`
+## Installation --> frontend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Open a terminal in your IDEA and type *npm ci*. This will install all the packages you need for the application to run.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Start the application with *npm start*.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation --> backend
 
-### `npm run eject`
+1. Create environmental variable with name *APIKEY*. The value should be an official X-Riot-Token that you can get from this site: https://developer.riotgames.com
+	
+2. Set environmental variables from database creditentials:
+    *DB_NAME
+    *USERNAME
+    *PASSWORD
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. Start backend application and enjoy! :)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How to use
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can reach the frontend server on localhost:3000. It will communicate with the backend which is on localhost:8080.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Licence
 
-## Learn More
+MIT © Zsombor Kincses and Bence Bódis
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
