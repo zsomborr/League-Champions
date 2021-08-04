@@ -28,9 +28,11 @@ const FavouriteChampions = () => {
 
   const fetchFavouriteChampions = async () => {
     const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: user,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user.token,
+      },
     };
     const res = await fetch(`${API_BASE_URL}/user/favourites`, requestOptions);
     const data = await res.json();

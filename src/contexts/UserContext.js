@@ -3,12 +3,12 @@ import { useState, createContext, useEffect } from "react";
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
-  const [user, setUser] = useState(sessionStorage.getItem("user"));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   useEffect(() => {
     user === null
-      ? sessionStorage.removeItem("user")
-      : sessionStorage.setItem("user", user);
+      ? localStorage.removeItem("user")
+      : localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   return (

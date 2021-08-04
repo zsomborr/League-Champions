@@ -22,13 +22,12 @@ const Champions = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location.search, user]);
 
-  const toggleUpdate = () => {
-    console.log("Thanks for help Rudi");
-  };
+  const toggleUpdate = () => {};
 
   const fetchChampions = async (tag) => {
     let res;
     let requestOptions;
+    console.log(user);
     if (!user) {
       res =
         tag !== null
@@ -36,9 +35,11 @@ const Champions = (props) => {
           : await fetch(`${API_BASE_URL}/champions`);
     } else {
       requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: user,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + user.token,
+        },
       };
       res =
         tag !== null

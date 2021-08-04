@@ -21,12 +21,12 @@ const ChampionDetail = (props) => {
   const toggleFavouriteChamp = (e) => {
     e.preventDefault();
     const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: user,
-        championId: props.location.state.champion.key,
-      }),
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user.token,
+      },
+      body: props.location.state.champion.key,
     };
     fetch(`${API_BASE_URL}/user/update-favourite`, requestOptions);
     props.location.state.champion.favourite =

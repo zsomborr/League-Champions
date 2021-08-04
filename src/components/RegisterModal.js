@@ -3,11 +3,11 @@ import { useState } from "react";
 import { API_BASE_URL } from "../constants";
 
 const RegisterModal = ({ toggleRegisterModal }) => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setUsername(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -19,7 +19,7 @@ const RegisterModal = ({ toggleRegisterModal }) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ username: username, password: password }),
     };
     fetch(`${API_BASE_URL}/register`, requestOptions).then((response) =>
       console.log(response)
@@ -39,11 +39,11 @@ const RegisterModal = ({ toggleRegisterModal }) => {
           <h3>Register</h3>
 
           <div>
-            <label>Email address</label>
+            <label>Username:</label>
             <br />
             <input
-              type="email"
-              placeholder="Enter email"
+              type="username"
+              placeholder="Enter username"
               onChange={handleEmailChange}
             />
           </div>

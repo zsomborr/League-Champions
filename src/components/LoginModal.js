@@ -4,13 +4,13 @@ import { API_BASE_URL } from "../constants";
 import { UserContext } from "../contexts/UserContext";
 
 const LoginModal = ({ toggleLoginModal, onLogin }) => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(UserContext);
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setUsername(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -22,16 +22,26 @@ const LoginModal = ({ toggleLoginModal, onLogin }) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ username: username, password: password }),
     };
 
     fetch(`${API_BASE_URL}/login`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => data && handleLoggedIn());
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Wrong creditentials");
+        }
+      })
+      .then((data) => handleLoggedIn(data))
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  const handleLoggedIn = () => {
-    setUser(email);
+  const handleLoggedIn = (data) => {
+    console.log(data.token);
+    setUser(data);
     onLogin();
   };
 
@@ -48,11 +58,11 @@ const LoginModal = ({ toggleLoginModal, onLogin }) => {
           <h3>Sign in</h3>
 
           <div>
-            <label>Email address</label>
+            <label>Username:</label>
             <br />
             <input
-              type="email"
-              placeholder="Enter email"
+              type="username"
+              placeholder="Enter username"
               onChange={handleEmailChange}
             />
           </div>
