@@ -36,9 +36,12 @@ const Champion = ({ champion, toggleUpdate }) => {
 
   const toggleFavouriteChamp = () => {
     const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: user, championId: champion.key }),
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user.token,
+      },
+      body: champion.key,
     };
     fetch(`${API_BASE_URL}/user/update-favourite`, requestOptions);
     champion.favourite = !champion.favourite;
