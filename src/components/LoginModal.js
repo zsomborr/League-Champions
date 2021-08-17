@@ -40,7 +40,7 @@ const LoginModal = ({ toggleLoginModal, onLogin }) => {
   };
 
   const handleLoggedIn = (data) => {
-    console.log(data.token);
+    console.log(data);
     setUser(data);
     onLogin();
   };
