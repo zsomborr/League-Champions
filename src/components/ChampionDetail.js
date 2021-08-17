@@ -47,11 +47,13 @@ const ChampionDetail = (props) => {
           }_0.jpg`}
         ></img>
         <div>
-          <Icon
-            icon={starIcon}
-            color={favourite ? "#d3b509" : "black"}
-            onClick={toggleFavouriteChamp}
-          />
+          {user && (
+            <Icon
+              icon={starIcon}
+              color={favourite ? "#d3b509" : "black"}
+              onClick={toggleFavouriteChamp}
+            />
+          )}
           <HeaderDiv>
             <h2>{props.location.state.champion.name}</h2>
           </HeaderDiv>
