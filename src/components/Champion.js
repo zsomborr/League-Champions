@@ -12,8 +12,8 @@ const Champion = ({ champion, toggleUpdate }) => {
     color: "#d3b509",
     backgroundColor: "#2c5d72",
   });
-  // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useContext(UserContext);
+
+  const user = useContext(UserContext)[0];
   const [favourite, setFavourite] = useState(champion.favourite);
 
   useEffect(() => {
