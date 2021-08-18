@@ -22,7 +22,7 @@ const RegisterModal = ({ toggleRegisterModal }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
     };
-    fetch(`${API_BASE_URL}/register`, requestOptions)
+    fetch(`${API_BASE_URL}/auth/register`, requestOptions)
       .then((response) => response.json())
       .then((data) => (data ? toggleRegisterModal() : setInvalid(true)));
   };

@@ -25,7 +25,7 @@ const LoginModal = ({ toggleLoginModal, onLogin }) => {
       body: JSON.stringify({ username: username, password: password }),
     };
 
-    fetch(`${API_BASE_URL}/login`, requestOptions)
+    fetch(`${API_BASE_URL}/auth/login`, requestOptions)
       .then((response) => {
         if (response.ok) {
           return response.json();
